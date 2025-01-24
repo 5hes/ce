@@ -8,6 +8,7 @@ concurrency:
 env:
   LINK: 'https://ziglang.org/builds/zig-linux-x86_64-0.14.0-dev.2851+b074fb7dd.tar.xz'
   SRC: 'ce.c buffer.c dirlist.c editor.c game.c hist.c proc.c syntax.c term.c utf8.c'
+  CFLAGS: '-target aarch64-linux-musl -fstrip -fno-PIC -ffunction-sections -fdata-sections -fno-PIE -fllvm -flibllvm -flto -library c'
   
 jobs:
   CreatTag:
@@ -49,7 +50,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build-exe -target "aarch64-linux-musl" -mcpu="kryo" -O ReleaseFast -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build-exe $CFLAGS -mcpu="kryo" -O ReleaseFast --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -86,7 +87,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build-exe -target "aarch64-linux-musl" -mcpu="kryo" -O ReleaseSmall -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build-exe $CFLAGS -target "aarch64-linux-musl" -mcpu="kryo" -O ReleaseSmall --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -127,7 +128,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build-exe -target "aarch64-linux-musl" -mcpu="cortex_x1c" -O ReleaseFast -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build-exe $CFLAGS -target "aarch64-linux-musl" -mcpu="cortex_x1c" -O ReleaseFast --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -164,7 +165,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build-exe -target "aarch64-linux-musl" -mcpu="cortex_x1c" -O ReleaseSmall -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build-exe $CFLAGS -mcpu="cortex_x1c" -O ReleaseSmall --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -205,7 +206,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build-exe -target "aarch64-linux-musl" -mcpu="baseline" -O ReleaseFast -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build-exe $CFLAGS -mcpu="baseline" -O ReleaseFast -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
@@ -242,7 +243,7 @@ jobs:
         tar -xf zig.tar.xz && rm zig.tar.xz
         mv * zig && cd zig && export PATH=$PATH:$PWD
         cd ../..
-        zig build-exe -target "aarch64-linux-musl" -mcpu="baseline" -O ReleaseSmall -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
+        zig build-exe $CFLAGS -mcpu="baseline" -O ReleaseSmall -fstack-protector-all -fstrip --zig-lib-dir "$PWD/.zig/zig/lib"
     - name: Pack output
       run: |
         mv zig-out nightly
