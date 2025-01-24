@@ -6,7 +6,7 @@ concurrency:
   group: ${{ github.head_ref || github.run_id }}-${{ github.actor }}
   cancel-in-progress: true
 env:
-  LINK: 'https://ziglang.org/builds/zig-linux-aarch64-0.14.0-dev.2851+b074fb7dd.tar.xz'
+  LINK: 'https://ziglang.org/builds/zig-linux-x86_64-0.14.0-dev.2851+b074fb7dd.tar.xz'
   SRC: 'ce.c buffer.c dirlist.c editor.c game.c hist.c proc.c syntax.c term.c utf8.c'
   
 jobs:
